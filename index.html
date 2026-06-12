@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <title>Velocity Drive - 3D Driving Game</title>
+  <link rel='stylesheet' href='/src/style.css' />
+</head>
+<body>
+  <!-- WebGL canvas container -->
+  <div id='app'></div>
+
+  <!-- Loading screen -->
+  <div id='loading-screen'>
+    <h1>VELOCITY DRIVE</h1>
+    <div class='progress'><div id='loading-bar'></div></div>
+    <p id='loading-text'>Booting...</p>
+  </div>
+
+  <!-- Main menu -->
+  <div id='main-menu' class='panel hidden'>
+    <h1>VELOCITY DRIVE</h1>
+    <p id='menu-best'>Best score: 0</p>
+    <button id='btn-start' class='btn primary'>START DRIVE</button>
+    <button id='btn-garage' class='btn'>GARAGE</button>
+    <button id='btn-settings' class='btn'>SETTINGS</button>
+    <p class='hint'>WASD / Arrows drive &middot; Shift nitro &middot; Space handbrake &middot; C camera &middot; Esc pause</p>
+  </div>
+
+  <!-- Garage -->
+  <div id='garage' class='panel hidden'>
+    <h2>GARAGE</h2>
+    <p class='coins-line'><span class='coin-dot'></span> <span id='garage-coins'>0</span> coins</p>
+    <h3>Paint</h3>
+    <div id='color-swatches' class='swatch-row'></div>
+    <h3>Wheels</h3>
+    <div id='wheel-swatches' class='swatch-row'></div>
+    <h3>Upgrades</h3>
+    <div id='upgrade-list'></div>
+    <button id='btn-garage-back' class='btn'>BACK</button>
+  </div>
+
+  <!-- Settings -->
+  <div id='settings' class='panel hidden'>
+    <h2>SETTINGS</h2>
+    <label class='row'>Quality
+      <select id='opt-quality'>
+        <option value='low'>Low</option>
+        <option value='medium'>Medium</option>
+        <option value='high'>High</option>
+      </select>
+    </label>
+    <label class='row'><input type='checkbox' id='opt-bloom' /> Bloom / post-processing</label>
+    <label class='row'><input type='checkbox' id='opt-sound' /> Sound</label>
+    <button id='btn-settings-back' class='btn'>BACK</button>
+  </div>
+
+  <!-- Pause menu -->
+  <div id='pause-menu' class='panel hidden'>
+    <h2>PAUSED</h2>
+    <button id='btn-resume' class='btn primary'>RESUME</button>
+    <button id='btn-quit' class='btn'>QUIT TO MENU</button>
+  </div>
+
+  <!-- Game over -->
+  <div id='game-over' class='panel hidden'>
+    <h2 id='go-title'>RUN OVER</h2>
+    <p>Score <b id='go-score'>0</b> &middot; Distance <b id='go-distance'>0</b> km &middot; Coins <b id='go-coins'>0</b></p>
+    <h3>Leaderboard</h3>
+    <ol id='leaderboard-list'></ol>
+    <button id='btn-restart' class='btn primary'>DRIVE AGAIN</button>
+    <button id='btn-menu' class='btn'>MAIN MENU</button>
+  </div>
+
+  <!-- In-game HUD -->
+  <div id='hud' class='hidden'>
+    <div id='hud-top'>
+      <div id='timer'>0:00</div>
+      <div id='mission-text'></div>
+      <div id='coin-box'><span class='coin-dot'></span> <span id='coin-count'>0</span></div>
+    </div>
+    <canvas id='minimap' width='140' height='190'></canvas>
+    <div id='hud-bottom-left'>
+      <div class='bar'><span>HP</span><div class='track'><div id='health-fill'></div></div></div>
+      <div class='bar'><span>FUEL</span><div class='track'><div id='fuel-fill'></div></div></div>
+      <div class='bar'><span>NOS</span><div class='track'><div id='nitro-fill'></div></div></div>
+    </div>
+    <div id='hud-bottom-right'>
+      <div id='speed-value'>0</div>
+      <div class='unit'>km/h</div>
+      <div id='distance'>0.0 km</div>
+    </div>
+  </div>
+
+  <!-- Mobile touch controls -->
+  <div id='touch-controls' class='hidden'>
+    <div class='tc-left'>
+      <button id='touch-left' class='tc'>&#9664;</button>
+      <button id='touch-right' class='tc'>&#9654;</button>
+    </div>
+    <div class='tc-right'>
+      <button id='touch-nitro' class='tc small'>N</button>
+      <button id='touch-brake' class='tc small'>B</button>
+      <button id='touch-gas' class='tc'>&#9650;</button>
+    </div>
+  </div>
+
+  <script type='module' src='/src/main.js'></script>
+</body>
+</html>
