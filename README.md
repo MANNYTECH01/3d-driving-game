@@ -1,77 +1,93 @@
-# Velocity Drive - 3D Driving Game
+# 3d-driving-game
 
-An endless 3D driving game built with **Three.js** and **Vite**. Drive a sports car down a procedurally generated highway through changing environments (highway, city, desert, mountain), dodge AI traffic, collect coins, hit checkpoints, and upgrade your car in the garage.
 
-Everything is procedural (geometry, audio, effects), so there are **no binary assets** and the game runs fully offline after install.
 
-## Quick start
+## Getting started
 
-```bash
-npm install
-npm run dev      # open the printed localhost URL
-npm run build    # production build into dist/
-```
+To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 
-## Controls
+Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
-| Action | Keyboard | Gamepad | Touch |
-|---|---|---|---|
-| Steer | A/D or Arrows | Left stick | On-screen arrows |
-| Accelerate | W / Up | RT | Up button |
-| Brake | S / Down | LT | B button |
-| Nitro | Shift | A button | N button |
-| Handbrake (drift) | Space | X button | - |
-| Toggle camera | C | Y button | - |
-| Pause | Esc / P | Start | - |
+## Add your files
 
-## Features
-
-- Endless procedural highway with 4 rotating environment themes
-- Arcade vehicle physics: speed-sensitive steering, drifting, nitro with FOV kick
-- Third-person chase camera and cockpit camera
-- AI traffic with overtake tracking and collision crashes
-- Coins, fuel pickups, checkpoints with rewards
-- Day/night cycle, sunset lighting, dynamic weather (rain, fog)
-- Particle systems: tire smoke, crash sparks, rain
-- Procedural Web Audio: engine pitch tied to speed, tire screech, wind, crash and coin SFX
-- HUD: speedometer, minimap, timer, health/fuel/nitro bars, mission text
-- Garage: paint colors, wheel styles, engine/handling/nitro upgrades (paid with coins)
-- Local save: progress, garage, settings and a top-5 leaderboard (localStorage)
-- Quality presets (low/medium/high), bloom post-processing toggle, mobile-friendly
-
-## Architecture
+* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
+* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
 
 ```
-src/
-  main.js                  Boot sequence + loading screen
-  core/
-    Game.js                Game state machine, run loop, scoring, crash/fuel logic
-    InputManager.js        Keyboard + touch + gamepad, merged into one input state
-    AudioManager.js        Procedural Web Audio (engine, screech, wind, SFX)
-    SaveManager.js         localStorage persistence (coins, garage, settings, leaderboard)
-  vehicle/
-    Car.js                 Car mesh (procedural) + arcade physics + nitro + headlights
-  world/
-    RoadGenerator.js       Pooled road segments, lane markings, rails, themed props
-    Traffic.js             Pooled AI traffic cars, spawning, collision detection
-    Pickups.js             Coin clusters + fuel cans with recycling
-    Checkpoints.js         Checkpoint gates and rewards
-    DayNightCycle.js       Sun/sky/fog interpolation + weather state machine
-  effects/
-    Particles.js           Generic particle pools + rain field
-    CameraRig.js           Chase/cockpit cameras, FOV kick, screen shake, menu orbit
-    PostProcessing.js      EffectComposer + UnrealBloom (toggleable)
-  ui/
-    HUD.js                 DOM HUD + canvas minimap
-    Menus.js               All menu screens, garage, settings, pause, game over
+cd existing_repo
+git remote add origin https://gitlab.com/university-of-lagos-group/3d-driving-game.git
+git branch -M main
+git push -uf origin main
 ```
 
-### Design notes
+## Integrate with your tools
 
-- **Physics**: a custom arcade model (separate heading vs. travel direction with grip interpolation) is used for stable, smooth handling on all devices. The `Car` class isolates all physics, so swapping in `cannon-es` RaycastVehicle later only touches one file.
-- **Asset pipeline**: all meshes are built from Three.js primitives with shared geometries/materials. To use GLTF/GLB models, replace the `_buildMesh` methods and load via `GLTFLoader` during the boot sequence in `main.js`.
-- **Performance**: object pooling for segments/traffic/coins/particles, capped pixel ratio, shadow map that follows the player, and post-processing that can be disabled per quality preset.
+* [Set up project integrations](https://gitlab.com/university-of-lagos-group/3d-driving-game/-/settings/integrations)
 
-## Roadmap ideas
+## Collaborate with your team
 
-Multiplayer racing, police chase mode, damage affecting handling, replay cameras, VR (WebXR), real GLTF car models and audio samples.
+* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
+* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
+* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
+* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
+* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+
+## Test and Deploy
+
+Use the built-in continuous integration in GitLab.
+
+* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
+* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
+* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
+* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
+* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+
+***
+
+# Editing this README
+
+When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+
+## Suggestions for a good README
+
+Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+
+## Name
+Choose a self-explaining name for your project.
+
+## Description
+Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+
+## Badges
+On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+
+## Visuals
+Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+
+## Installation
+Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+
+## Usage
+Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+
+## Support
+Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+
+## Roadmap
+If you have ideas for releases in the future, it is a good idea to list them in the README.
+
+## Contributing
+State if you are open to contributions and what your requirements are for accepting them.
+
+For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+
+You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+
+## Authors and acknowledgment
+Show your appreciation to those who have contributed to the project.
+
+## License
+For open source projects, say how it is licensed.
+
+## Project status
+If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
